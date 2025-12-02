@@ -1,13 +1,14 @@
-package routers
+package routes
 
 import (
-	"myapp/controllers"
+	"myapp/internal/controllers"
+
 	"github.com/gin-gonic/gin"
 )
 
 func SetupRoutes(router *gin.Engine) {
 	userCtrl := controllers.NewUserController()
-	orderCtrl := controllers.NewOrderController()
+	// orderCtrl := controllers.NewOrderController()
 
 	v1 := router.Group("/api/v1")
 	{
@@ -16,11 +17,11 @@ func SetupRoutes(router *gin.Engine) {
 			users.POST("/", userCtrl.CreateUser)
 			users.GET("/:id", userCtrl.GetUserByID)
 		}
-		orders := v1.Group("/orders")
-		{
-			orders.POST("/", orderCtrl.CreateOrder)
-			orders.GET("/:id", orderCtrl.GetOrderByID)
-		}
+		// orders := v1.Group("/orders")
+		// {
+		// 	orders.POST("/", orderCtrl.CreateOrder)
+		// 	orders.GET("/:id", orderCtrl.GetOrderByID)
+		// }
 	}
 
 }
