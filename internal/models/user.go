@@ -2,7 +2,7 @@ package models
 
 import (
 	"time"
-	// "gorm.io/gorm"
+	"gorm.io/gorm"
 )
 
 const (
@@ -17,7 +17,6 @@ const (
 )
 
 type User struct {
-	ID       uint   `gorm:"primaryKey" json:"id"`
 	Username string `gorm:"size:50;uniqueIndex;not null" json:"username"`
 	Email    string `gorm:"size:100;uniqueIndex;not null" json:"email"`
 	Password string `gorm:"size:255;not null" json:"password"`
@@ -31,11 +30,10 @@ type User struct {
 	Birthdate *time.Time `json:"birthdate"`
 
 	LastLoginAt *time.Time `json:last_login_at`
-	CreatedAt   time.Time  `json:created_at`
-	UpdateAt    *time.Time `json:update_at`
 
 	// Products []Product `gorm:"foreignKey:UserID" json:"pruducts,omitempty"`
 	// Orders   []Order   `gorm:"foreignKey:UserID" json:"orders,omitempty"`
+	gorm.Model
 }
 
 type UpdateUserRequest struct {

@@ -9,7 +9,7 @@ import (
 )
 
 func main() {
-	database.InitDB(&models.User{})
+	database.InitDB(&models.User{}, &models.Product{})
 
 	router := gin.Default()
 

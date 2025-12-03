@@ -2,7 +2,7 @@ package controllers
 
 import (
 	"myapp/internal/models"
-	"myapp/internal/repositories"
+	"myapp/internal/services"
 	"net/http"
 	"strconv"
 
@@ -11,11 +11,11 @@ import (
 )
 
 type UserController struct {
-	Repo *repositories.UserRepository
+	Service *services.UserService
 }
 
 func NewUserController() *UserController {
-	return &UserController{Repo: repositories.NewUserRepository()}
+	return &UserController{Service: services.NewUserService()}
 }
 
 func (ctrl *UserController) CreateUser(c *gin.Context) {
@@ -25,8 +25,8 @@ func (ctrl *UserController) CreateUser(c *gin.Context) {
 		return
 	}
 
-	if err := ctrl.Repo.CreateUser(&user); err != nil {
-		c.JSON(http.StatusInternalServerError, gin.H{"error": "Failed" + err.Error()})
+	if err := ctrl.Service.CreateUser(&user); err != nil {
+		c.JSON(http.StatusInternalServerError, gin.H{"error": "Failed " + err.Error()})
 		return
 	}
 
@@ -43,7 +43,7 @@ func (ctrl *UserController) GetUserByID(c *gin.Context) {
 		return
 	}
 
-	user, err := ctrl.Repo.FindUserByID(uint(id))
+	user, err := ctrl.Service.GetUserByID(uint(id))
 	if err != nil {
 		if err == gorm.ErrRecordNotFound {
 			c.JSON(http.StatusNotFound, gin.H{"error": "User not found"})
