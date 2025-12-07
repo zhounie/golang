@@ -2,7 +2,6 @@ package models
 
 import (
 	"time"
-	"gorm.io/gorm"
 )
 
 const (
@@ -17,23 +16,36 @@ const (
 )
 
 type User struct {
+	// // @swaggo.ignore
+	// gorm.Model
+	// 用户名
 	Username string `gorm:"size:50;uniqueIndex;not null" json:"username"`
-	Email    string `gorm:"size:100;uniqueIndex;not null" json:"email"`
+	// 邮箱
+	Email string `gorm:"size:100;uniqueIndex;not null" json:"email"`
+	// 密码
 	Password string `gorm:"size:255;not null" json:"password"`
-	Phone    string `gorm:"size:20" json:"phone"`
-	Avatar   string `gorm:"size:255" json:"avatar"`
-	Role     string `gorm:"size:20;default:'customer'" json:"role"`
-	Status   string `gorm:"size:20;default:'active'" json:"status"`
+	// 手机号
+	Phone string `gorm:"size:20" json:"phone"`
+	// 头像
+	Avatar string `gorm:"size:255" json:"avatar"`
+	// 角色
+	Role string `gorm:"size:20;default:'customer'" json:"role"`
+	// 状态
+	Status string `gorm:"size:20;default:'active'" json:"status"`
 
-	Nickname  string     `gorm:"size:100" json:"nickname"`
-	Gender    string     `gorm:"size:10" json:"gender"`
+	// 昵称
+	Nickname string `gorm:"size:100" json:"nickname"`
+	// 性别
+	Gender string `gorm:"size:10" json:"gender"`
+	// 生日
 	Birthdate *time.Time `json:"birthdate"`
 
+	// 最近登录时间
 	LastLoginAt *time.Time `json:last_login_at`
 
 	// Products []Product `gorm:"foreignKey:UserID" json:"pruducts,omitempty"`
 	// Orders   []Order   `gorm:"foreignKey:UserID" json:"orders,omitempty"`
-	gorm.Model
+
 }
 
 type UpdateUserRequest struct {
