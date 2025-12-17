@@ -2,6 +2,8 @@ package models
 
 import (
 	"time"
+
+	"gorm.io/gorm"
 )
 
 const (
@@ -17,7 +19,7 @@ const (
 
 type User struct {
 	// // @swaggo.ignore
-	// gorm.Model
+	gorm.Model
 	// 用户名
 	Username string `gorm:"size:50;uniqueIndex;not null" json:"username"`
 	// 邮箱
@@ -53,16 +55,4 @@ type UpdateUserRequest struct {
 	Phone     string    `json:"phone"`
 	Gender    string    `json:"gender"`
 	Birthdate time.Time `json:"birthdate"`
-}
-
-type LoginRequest struct {
-	Username string `json:"username" binding:"required"`
-	Password string `json:"password" binding:"required"`
-}
-
-type RegisterRequest struct {
-	Username string `json:"username" binding:"required,min=3,max=50"`
-	Email    string `json:"email" binding:"required,email"`
-	Password string `json:"password" binding:"required,min=6"`
-	Phone    string `json:"phone" binding:"omitempty,len=11"`
 }

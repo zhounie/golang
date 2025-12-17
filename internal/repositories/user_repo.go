@@ -1,9 +1,10 @@
 package repositories
 
 import (
-	"myapp/internal/database"
 	"myapp/internal/models"
+	"myapp/pkg/database"
 
+	"golang.org/x/crypto/bcrypt"
 	"gorm.io/gorm"
 )
 
@@ -16,6 +17,11 @@ func NewUserRepository() *UserRepository {
 }
 
 func (r *UserRepository) CreateUser(user *models.User) error {
+	hashPassword, err := bcrypt.GenerateFromPassword([]byte(user.Password), bcrypt.DefaultCost)
+	if err != nil {
+		return err
+	}
+	user.Password = string(hashPassword)
 	return r.DB.Create(user).Error
 }
 

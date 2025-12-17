@@ -1,10 +1,10 @@
 package services
 
 import (
-	"myapp/internal/models"
-	"myapp/internal/repositories"
 	"errors"
 	"log"
+	"myapp/internal/models"
+	"myapp/internal/repositories"
 )
 
 type UserService struct {
