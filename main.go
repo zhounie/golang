@@ -1,8 +1,10 @@
 package main
 
 import (
+	"myapp/internal/middleware"
 	"myapp/internal/models"
 	"myapp/internal/routes"
+	"myapp/internal/utils"
 	"myapp/pkg/database"
 
 	"github.com/gin-gonic/gin"
@@ -19,9 +21,14 @@ import (
 // host localhost:8080
 // @BasePath  /api/v1
 func main() {
+
+	utils.InitSnowflake(1)
+
 	database.InitDB(&models.User{}, &models.Product{})
 
 	router := gin.Default()
+
+	router.Use(middleware.Recovery())
 
 	routes.SetupRoutes(router)
 

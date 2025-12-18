@@ -2,8 +2,6 @@ package models
 
 import (
 	"time"
-
-	"gorm.io/gorm"
 )
 
 const (
@@ -18,8 +16,8 @@ const (
 )
 
 type User struct {
-	// // @swaggo.ignore
-	gorm.Model
+	Base
+
 	// 用户名
 	Username string `gorm:"size:50;uniqueIndex;not null" json:"username"`
 	// 邮箱

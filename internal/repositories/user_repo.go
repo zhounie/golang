@@ -30,3 +30,9 @@ func (r *UserRepository) FindUserByID(id uint) (*models.User, error) {
 	err := r.DB.First(&user, id).Error
 	return &user, err
 }
+
+func (r *UserRepository) DeleteUser(id []int64) error {
+	var user models.User
+	err := r.DB.Where("id IN ?", id).Delete(user).Error
+	return err
+}

@@ -46,6 +46,33 @@ const docTemplate = `{
                         }
                     }
                 }
+            },
+            "delete": {
+                "description": "根据ID删除用户",
+                "produces": [
+                    "application/json"
+                ],
+                "tags": [
+                    "users"
+                ],
+                "summary": "删除用户",
+                "parameters": [
+                    {
+                        "type": "string",
+                        "description": "ids",
+                        "name": "ids",
+                        "in": "query",
+                        "required": true
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "$ref": "#/definitions/models.User"
+                        }
+                    }
+                }
             }
         },
         "/api/v1/users/:id": {
@@ -90,6 +117,9 @@ const docTemplate = `{
                     "description": "生日",
                     "type": "string"
                 },
+                "created_at": {
+                    "type": "string"
+                },
                 "email": {
                     "description": "邮箱",
                     "type": "string"
@@ -97,6 +127,10 @@ const docTemplate = `{
                 "gender": {
                     "description": "性别",
                     "type": "string"
+                },
+                "id": {
+                    "type": "string",
+                    "example": "0"
                 },
                 "lastLoginAt": {
                     "description": "最近登录时间",
@@ -122,8 +156,11 @@ const docTemplate = `{
                     "description": "状态",
                     "type": "string"
                 },
+                "updated_at": {
+                    "type": "string"
+                },
                 "username": {
-                    "description": "// @swaggo.ignore\ngorm.Model\n用户名",
+                    "description": "用户名",
                     "type": "string"
                 }
             }

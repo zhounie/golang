@@ -26,3 +26,7 @@ func (s *UserService) CreateUser(user *models.User) error {
 func (s *UserService) GetUserByID(id uint) (*models.User, error) {
 	return s.Repo.FindUserByID(id)
 }
+
+func (s *UserService) DeleteUser(id []int64) error {
+	return s.Repo.DeleteUser(id)
+}
